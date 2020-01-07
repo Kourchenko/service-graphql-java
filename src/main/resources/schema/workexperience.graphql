@@ -1,0 +1,16 @@
+schema {
+    query: Query
+}
+
+type Query {
+    allWorkExperience: [WorkExperience]
+}
+
+type WorkExperience {
+    companyName: String!
+    roleTitle: String!
+    companyState: String!
+    startDate: String!
+    endDate: String!
+    isCurrentRole: Boolean!
+}

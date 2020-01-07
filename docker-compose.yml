@@ -1,0 +1,26 @@
+version: '3'
+services:
+  mysql:
+    container_name: mysql
+    image: mysql/mysql-server:5.7
+    environment:
+      MYSQL_DATABASE: suyc
+      MYSQL_USER: suyc
+      MYSQL_PASSWORD: suyc
+      MYSQL_ROOT_PASSWORD: suyc
+      MYSQL_ROOT_HOST: '%'
+    ports:
+    - "3306:3306"
+    restart: always
+
+  graphql-java:
+    build: .
+    volumes:
+    - .:/app
+    - ~/.m2:/root/.m2
+    working_dir: /app
+    ports:
+    - 8080:8080
+    command: mvn clean spring-boot:run
+    depends_on:
+    - mysql
