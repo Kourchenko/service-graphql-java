@@ -21,7 +21,7 @@ $ docker-compose up
 $ docker-compose up -d
 ```
 
-Use Postman to hit `http://localhost:8080/allWorkExperience` to interact with the application.
+Use Postman to hit `http://localhost:8080/graphql/resume` to interact with the data.
 
 
 ## Stopping the app
