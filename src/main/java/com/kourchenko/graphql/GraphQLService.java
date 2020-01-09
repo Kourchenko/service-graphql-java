@@ -1,7 +1,9 @@
 package com.kourchenko.graphql;
 
 import com.kourchenko.graphql.datafetcher.AllWorkExperienceDataFetcher;
+import com.kourchenko.graphql.datafetcher.ResumeDataFetcher;
 import com.kourchenko.model.WorkExperience;
+import com.kourchenko.repository.ResumeRepository;
 import com.kourchenko.repository.WorkExperienceRepository;
 
 import java.io.File;
@@ -23,7 +25,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GraphQLService {
-    private WorkExperienceRepository workExperienceRepository;
+    private ResumeRepository resumeRepository;
+
+    private ResumeDataFetcher resumeDataFetcher;
 
     private AllWorkExperienceDataFetcher allWorkExperienceDataFetcher;
 
@@ -33,8 +37,12 @@ public class GraphQLService {
     private GraphQL graphQL;
 
     @Autowired
-    public GraphQLService(WorkExperienceRepository workExperienceRepository, AllWorkExperienceDataFetcher allWorkExperienceDataFetcher) {
-        this.workExperienceRepository = workExperienceRepository;
+    public GraphQLService(
+            ResumeRepository resumeRepository, 
+            ResumeDataFetcher resumeDataFetcher,
+            AllWorkExperienceDataFetcher allWorkExperienceDataFetcher) {
+        this.resumeRepository = resumeRepository;
+        this.resumeDataFetcher = resumeDataFetcher;
         this.allWorkExperienceDataFetcher = allWorkExperienceDataFetcher;
     }
 
@@ -52,6 +60,7 @@ public class GraphQLService {
     private RuntimeWiring buildRuntimeWiring() {
         return RuntimeWiring.newRuntimeWiring()
             .type("Query", typeWiring -> typeWiring
+                .dataFetcher("resume", resumeDataFetcher)
                 .dataFetcher("allWorkExperience", allWorkExperienceDataFetcher))
                 .build();
     }

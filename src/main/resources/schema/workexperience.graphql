@@ -3,7 +3,13 @@ schema {
 }
 
 type Query {
+    resume: Resume
     allWorkExperience: [WorkExperience]
+}
+
+type Resume {
+    firstName: String!
+    lastName: String!
 }
 
 type WorkExperience {
