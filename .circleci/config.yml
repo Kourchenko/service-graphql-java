@@ -1,12 +1,13 @@
 version: 2
 jobs:
     build:
-        working_directory: ~/service-graphql-java
         docker:
             - image: circleci/openjdk:8-jdk-stretch
+        
+        working_directory: ~/service-graphql-java
 
         steps:
-            - checkout # check out source code to working directory
+            - checkout
 
             - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
                 # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
