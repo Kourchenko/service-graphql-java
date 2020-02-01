@@ -6,8 +6,8 @@ import graphql.schema.DataFetchingEnvironment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.kourchenko.repository.ResumeRepository;
-import com.kourchenko.model.Resume;
+import com.kourchenko.graphql.repository.ResumeRepository;
+import com.kourchenko.graphql.model.Resume;
 
 @Component
 public class ResumeDataFetcher implements DataFetcher<Resume> {

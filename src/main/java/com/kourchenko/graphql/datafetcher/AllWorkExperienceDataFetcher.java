@@ -2,8 +2,8 @@ package com.kourchenko.graphql.datafetcher;
 
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
-import com.kourchenko.repository.WorkExperienceRepository;
-import com.kourchenko.model.WorkExperience;
+import com.kourchenko.graphql.repository.WorkExperienceRepository;
+import com.kourchenko.graphql.model.WorkExperience;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

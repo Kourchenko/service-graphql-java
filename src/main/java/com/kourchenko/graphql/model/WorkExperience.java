@@ -1,4 +1,4 @@
-package com.kourchenko.model;
+package com.kourchenko.graphql.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

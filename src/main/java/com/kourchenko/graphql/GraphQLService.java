@@ -2,9 +2,9 @@ package com.kourchenko.graphql;
 
 import com.kourchenko.graphql.datafetcher.AllWorkExperienceDataFetcher;
 import com.kourchenko.graphql.datafetcher.ResumeDataFetcher;
-import com.kourchenko.model.WorkExperience;
-import com.kourchenko.repository.ResumeRepository;
-import com.kourchenko.repository.WorkExperienceRepository;
+import com.kourchenko.graphql.model.WorkExperience;
+import com.kourchenko.graphql.repository.ResumeRepository;
+import com.kourchenko.graphql.repository.WorkExperienceRepository;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class GraphQLService {
 
     private AllWorkExperienceDataFetcher allWorkExperienceDataFetcher;
 
-    @Value("classpath:schema/workexperience.graphql")
+    @Value("classpath:graohql/schema.graphql")
     Resource resource;
 
     private GraphQL graphQL;
