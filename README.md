@@ -1,7 +1,6 @@
 # service-graphql-java
 GraphQL Endpoint using Docker, MySQL, and JPA.
 
-# Template:
 [![Kourchenko](https://circleci.com/gh/Kourchenko/service-graphql-java.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
 
 ## Setup
