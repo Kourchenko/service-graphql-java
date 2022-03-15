@@ -1,0 +1,48 @@
+type Query {
+    resume(id: ID): Resume
+}
+
+type Mutation {
+    createResume(person: PersonInput): Resume
+
+    createWorkExperience(workExperienceList: [WorkExperienceInput], resumeId: ID): [WorkExperience]
+}
+
+type Resume {
+    id: ID!
+    createdDate: String!
+    updatedDate: String!
+    person: Person
+    workExperienceList: [WorkExperience]
+}
+
+type Person {
+    id: ID!
+    firstName: String
+    lastName: String
+    emailAddress: String
+    phoneNumber: String
+}
+
+input PersonInput {
+    firstName: String
+    lastName: String
+    emailAddress: String
+    phoneNumber: String
+}
+
+input WorkExperienceInput {
+    isCurrentRole: Boolean
+    companyName: String
+    roleTitle: String
+    startDate: String
+    endDate: String
+}
+
+type WorkExperience {
+    isCurrentRole: Boolean
+    companyName: String
+    roleTitle: String
+    startDate: String
+    endDate: String
+}
