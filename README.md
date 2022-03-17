@@ -240,7 +240,10 @@ $ docker-compose up
 $ docker-compose up -d
 ```
 
-Use Postman to hit `http://localhost:8080/graphiql` to interact with the data.
+## Working with the App
+<b>Interactactive GraphQL</b> in your web browser `http://localhost:8080/graphiql`.
+
+<b>Postman requests</b> sent to `http://localhost:8080/graphql` to interact with the data.
 
 
 ## Stopping the app
