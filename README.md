@@ -232,6 +232,9 @@ $ docker-compose up
 > Please note that Windows Home differs from Windows Pro for Docker installations.
 
 ## Running the App
+> <b>Note:</b> MySQL depends on PORT 3306. You will need to shut down any MySQL servers running on PORT 3306.
+
+> <b>MacOS:</b> System Preferences > MySQL > Stop MySQL Server.
 
 ```bash
 $ docker-compose up -d
