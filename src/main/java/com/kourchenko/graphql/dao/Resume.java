@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -62,7 +61,7 @@ public class Resume implements Serializable {
         return experienceList;
     }
 
-    public void setExperienceSet(List<Experience> experienceList) {
+    public void setExperienceList(List<Experience> experienceList) {
         this.experienceList = experienceList;
     }
 
@@ -70,7 +69,7 @@ public class Resume implements Serializable {
         return projectList;
     }
 
-    public void setProjectSet(List<Project> projectList) {
+    public void setProjectList(List<Project> projectList) {
         this.projectList = projectList;
     }
 

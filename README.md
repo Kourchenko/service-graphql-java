@@ -32,7 +32,8 @@ Class Resume
 
 ### Sample Mutation
 
-```mutation {
+```
+mutation {
   createResume(person: {
     name: "First Name - Last Name",
     emailAddress: null,
@@ -76,9 +77,12 @@ Class Resume
         startDate: "1975-01-01",
         endDate: "1975-01-02",
       }
-  ], resumeId: 2) {
-    id
-      isCurrentRole
+  	], resumeId: 1) {
+      isCurrentRole,
+      companyName,
+      roleTitle
+			startDate,
+      endDate
   },
   createEducationList(educationList: [
     {
@@ -90,9 +94,13 @@ Class Resume
         }
       ]
     }
-  ], resumeId: 2) {
-    id
+  ], resumeId: 1) {
+    id,
     degree,
+    schoolList {
+      name,
+      address
+    }
   }
 }
 ```
@@ -102,22 +110,111 @@ Class Resume
 ```
 query {
   resume(id: 1) {
-    id
+    id,
     person {
-      firstName
-      lastName
-      emailAddress
+      name,
+      emailAddress,
       phoneNumber
-    }
-    workExperienceList {
+    },
+    experienceList {
       isCurrentRole,
       companyName,
       roleTitle
 			startDate,
       endDate
+    },
+    educationList {
+      degree,
+      schoolList {
+        name,
+        address
+      }
     }
   }
 }
+```
+JSON Response
+```
+{
+    "data": {
+        "resume": {
+            "id": "1",
+            "person": {
+                "name": "First Name - Last Name",
+                "emailAddress": null,
+                "phoneNumber": null
+            },
+            "experienceList": [
+                {
+                    "isCurrentRole": false,
+                    "companyName": "Company 1",
+                    "roleTitle": "Role 1",
+                    "startDate": "1971-01-01 00:00:00.0",
+                    "endDate": "1971-01-02 00:00:00.0"
+                },
+                {
+                    "isCurrentRole": false,
+                    "companyName": "Company 2",
+                    "roleTitle": "Role 2",
+                    "startDate": "1972-01-01 00:00:00.0",
+                    "endDate": "1972-01-02 00:00:00.0"
+                },
+                {
+                    "isCurrentRole": false,
+                    "companyName": "Company 3",
+                    "roleTitle": "Role 3",
+                    "startDate": "1973-01-01 00:00:00.0",
+                    "endDate": "1973-01-02 00:00:00.0"
+                },
+                {
+                    "isCurrentRole": false,
+                    "companyName": "Company 4",
+                    "roleTitle": "Role 4",
+                    "startDate": "1974-01-01 00:00:00.0",
+                    "endDate": "1974-01-02 00:00:00.0"
+                },
+                {
+                    "isCurrentRole": true,
+                    "companyName": "Company 5",
+                    "roleTitle": "Role 5",
+                    "startDate": "1975-01-01 00:00:00.0",
+                    "endDate": "1975-01-02 00:00:00.0"
+                }
+            ],
+            "educationList": [
+                {
+                    "degree": "School Degree",
+                    "schoolList": [
+                        {
+                            "name": "School Name",
+                            "address": "School Address"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+```
+
+### Postman
+
+<b>POST</b> Query: http://localhost:8080/graphql
+```
+{
+    "query": "query {resume(id: 1) {id, person { name, emailAddress, phoneNumber}, experienceList {isCurrentRole, companyName, roleTitle, startDate, endDate}, educationList {degree, schoolList {name, address} } } }",
+    "variables": null
+}
+```
+
+cURL
+```sh
+curl --location --request POST 'http://localhost:8080/graphql' \
+--header 'Content-Type: text/plain' \
+--data-raw '{
+    "query": "query {resume(id: 1) {id, person { name, emailAddress, phoneNumber}, experienceList {isCurrentRole, companyName, roleTitle, startDate, endDate}, educationList {degree, schoolList {name, address} } } }",
+    "variables": null
+}'
 ```
 
 

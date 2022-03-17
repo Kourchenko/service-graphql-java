@@ -39,4 +39,8 @@ public class EducationService {
 
         return this.educationRepository.saveAll(educationList);
     }
+
+    public List<Education> findAllByResumeId(int id) {
+        return this.educationRepository.findAllByResumeId(id);
+    }
 }

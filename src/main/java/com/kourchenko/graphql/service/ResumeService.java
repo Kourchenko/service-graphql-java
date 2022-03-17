@@ -2,7 +2,6 @@ package com.kourchenko.graphql.service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import javax.transaction.Transactional;
 import com.kourchenko.graphql.dao.Person;
 import com.kourchenko.graphql.dao.Resume;
@@ -14,9 +13,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class ResumeService {
 
-    private final PersonRepository personRepository;
-
     private final ResumeRepository resumeRepository;
+
+    private final PersonRepository personRepository;
 
     public ResumeService(final ResumeRepository resumeRepository,
             final PersonRepository personRepository,
@@ -54,8 +53,7 @@ public class ResumeService {
         return this.resumeRepository.findAll();
     }
 
-    public Optional<Resume> getResumeById(int id) {
-        return this.resumeRepository.findById(id);
+    public Resume findByResumeId(int id) {
+        return this.resumeRepository.findById(id).get();
     }
-
 }

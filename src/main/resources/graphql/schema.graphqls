@@ -15,6 +15,7 @@ type Resume {
     createdDate: String!
     updatedDate: String!
     person: Person
+    educationList: [Education]
     experienceList: [Experience]
     projectList: [Project]
 }

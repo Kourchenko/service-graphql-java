@@ -34,4 +34,7 @@ public class ExperienceService {
         return this.experienceRepository.saveAll(experienceList);
     }
 
+    public List<Experience> findAllByResumeId(int id) {
+        return this.experienceRepository.findAllByResumeId(id);
+    }
 }

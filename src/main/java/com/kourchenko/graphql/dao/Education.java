@@ -16,6 +16,10 @@ public class Education implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    public int getId() {
+        return this.id;
+    }
+
     @ManyToOne
     @JoinColumn(name = "resume_id", nullable = false)
     private Resume resume;
