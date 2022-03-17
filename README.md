@@ -1,5 +1,5 @@
 # service-graphql-java
-GraphQL Endpoint using Docker, MySQL, and JPA.
+GraphQL Endpoint using Docker, MySQL, and SringBoot.
 
 [![Kourchenko](https://circleci.com/gh/Kourchenko/service-graphql-java.svg?style=shield)](https://github.com/Kourchenko/service-graphql-java#service-graphql-java)
 
