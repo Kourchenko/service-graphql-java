@@ -19,7 +19,7 @@ Class Resume
     a. String Company Name
     b. String Address
     d. Boolean Is Current Role
-    e. Role Title
+    e. String Role Title
     f. String Company Name
     g. String Role Title
     h. String Start Date
