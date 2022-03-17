@@ -81,7 +81,7 @@ mutation {
       isCurrentRole,
       companyName,
       roleTitle
-			startDate,
+	  startDate,
       endDate
   },
   createEducationList(educationList: [
@@ -120,7 +120,7 @@ query {
       isCurrentRole,
       companyName,
       roleTitle
-			startDate,
+	  startDate,
       endDate
     },
     educationList {
