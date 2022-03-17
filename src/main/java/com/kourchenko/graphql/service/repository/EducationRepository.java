@@ -1,9 +1,10 @@
 package com.kourchenko.graphql.service.repository;
 
-import com.kourchenko.graphql.dao.WorkExperience;
+import com.kourchenko.graphql.dao.Education;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface WorkExperienceRepository extends JpaRepository<WorkExperience, Integer> {
+public interface EducationRepository extends JpaRepository<Education, Integer> {
+
 }

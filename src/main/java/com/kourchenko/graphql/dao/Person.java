@@ -11,14 +11,11 @@ public class Person implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column
-    private String firstName;
-
-    @Column
-    private String lastName;
+    private String name;
 
     @Column
     private String emailAddress;
@@ -26,12 +23,8 @@ public class Person implements Serializable {
     @Column
     private String phoneNumber;
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setEmailAddress(String emailAddress) {

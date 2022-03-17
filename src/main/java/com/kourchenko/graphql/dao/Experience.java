@@ -8,11 +8,11 @@ import java.util.Date;
 
 @Data
 @Entity
-public class WorkExperience implements Serializable {
+public class Experience implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
@@ -40,32 +40,64 @@ public class WorkExperience implements Serializable {
     @Column
     private Date endDate;
 
+    public Resume getResume() {
+        return this.resume;
+    }
+
     public void setResume(Resume resume) {
         this.resume = resume;
+    }
+
+    public Boolean getIsCurrentRole() {
+        return this.isCurrentRole;
     }
 
     public void setIsCurrentRole(Boolean isCurrentRole) {
         this.isCurrentRole = isCurrentRole;
     }
 
+    public String getCompanyName() {
+        return this.companyName;
+    }
+
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public String getRoleTitle() {
+        return this.roleTitle;
     }
 
     public void setRoleTitle(String roleTitle) {
         this.roleTitle = roleTitle;
     }
 
+    public String getTools() {
+        return this.tools;
+    }
+
     public void setTools(String tools) {
         this.tools = tools;
+    }
+
+    public String getSkills() {
+        return this.skills;
     }
 
     public void setSkills(String skills) {
         this.skills = skills;
     }
 
+    public Date getStartDate() {
+        return this.startDate;
+    }
+
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return this.endDate;
     }
 
     public void setEndDate(Date endDate) {

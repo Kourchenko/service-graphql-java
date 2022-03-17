@@ -5,7 +5,9 @@ type Query {
 type Mutation {
     createResume(person: PersonInput): Resume
 
-    createWorkExperience(workExperienceList: [WorkExperienceInput], resumeId: ID): [WorkExperience]
+    createExperienceList(experienceList: [ExperienceInput], resumeId: ID): [Experience]
+
+    createEducationList(educationList: [EducationInput], resumeId: ID): [Education]
 }
 
 type Resume {
@@ -13,36 +15,76 @@ type Resume {
     createdDate: String!
     updatedDate: String!
     person: Person
-    workExperienceList: [WorkExperience]
+    experienceList: [Experience]
+    projectList: [Project]
 }
 
 type Person {
     id: ID!
-    firstName: String
-    lastName: String
+    name: String
     emailAddress: String
     phoneNumber: String
 }
 
 input PersonInput {
-    firstName: String
-    lastName: String
+    name: String
     emailAddress: String
     phoneNumber: String
 }
 
-input WorkExperienceInput {
+type School {
+    id: ID!
+    education: Education
+    name: String
+    address: String
+}
+
+input SchoolInput {
+    name: String
+    address: String
+}
+
+type Education {
+    id: ID!
+    degree: String
+    schoolList: [School]
+}
+
+input EducationInput {
+    degree: String
+    schoolList: [SchoolInput]
+}
+
+type Experience {
+    id: ID!
     isCurrentRole: Boolean
     companyName: String
     roleTitle: String
+    tools: String
+    skills: String
     startDate: String
     endDate: String
 }
 
-type WorkExperience {
+input ExperienceInput {
     isCurrentRole: Boolean
     companyName: String
     roleTitle: String
+    tools: String
+    skills: String
     startDate: String
     endDate: String
+}
+
+type Project {
+    id: ID!
+    projectName: String
+    roleTitle: String
+    description: String
+}
+
+input ProjectInput {
+    projectName: String
+    roleTitle: String
+    description: String
 }
