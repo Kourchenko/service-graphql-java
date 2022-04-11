@@ -4,8 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 @Data
 @Entity
@@ -16,20 +15,34 @@ public class Education implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    public int getId() {
-        return this.id;
-    }
-
     @ManyToOne
     @JoinColumn(name = "resume_id", nullable = false)
     private Resume resume;
 
     @Column
-    private String degree;
+    private String schoolName;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "education", cascade = CascadeType.ALL)
-    private List<School> schoolList;
+    @Column
+    private String schoolAddress;
 
+    @Column
+    private Date schoolStartDate;
+
+    @Column
+    private Date schoolEndDate;
+
+    @Column
+    private Float gpa;
+
+    @Column
+    private String degreeTitle;
+
+    @Column
+    private String degreeDescription;
+
+    public int getId() {
+        return this.id;
+    }
 
     public Resume getResume() {
         return this.resume;
@@ -39,20 +52,59 @@ public class Education implements Serializable {
         this.resume = resume;
     }
 
-    public String getDegree() {
-        return this.degree;
+    public String getSchoolName() {
+        return this.schoolName;
     }
 
-    public void setDegree(String degree) {
-        this.degree = degree;
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
     }
 
-    public List<School> getSchoolList() {
-        List<School> schoolList = new ArrayList<>(this.schoolList);
-        return schoolList;
+    public String getSchoolAddress() {
+        return this.schoolAddress;
     }
 
-    public void setSchoolList(List<School> schoolList) {
-        this.schoolList = schoolList;
+    public void setSchoolAddress(String schoolAddress) {
+        this.schoolAddress = schoolAddress;
+    }
+
+    public Date getSchoolStartDate() {
+        return this.schoolStartDate;
+    }
+
+    public void setSchoolStartDate(Date schoolStartDate) {
+        this.schoolStartDate = schoolStartDate;
+    }
+
+    public Date getSchoolEndDate() {
+        return this.schoolEndDate;
+    }
+
+    public void setSchoolEndDate(Date schoolEndDate) {
+        this.schoolEndDate = schoolEndDate;
+    }
+
+    public Float getGPA() {
+        return this.gpa;
+    }
+
+    public void setGPA(Float gpa) {
+        this.gpa = gpa;
+    }
+
+    public String getDegreeTitle() {
+        return this.degreeTitle;
+    }
+
+    public void setDegreeTitle(String degreeTitle) {
+        this.degreeTitle = degreeTitle;
+    }
+
+    public String getDegreeDescription() {
+        return this.degreeDescription;
+    }
+
+    public void setDegreeDescription(String degreeDescription) {
+        this.degreeDescription = degreeDescription;
     }
 }

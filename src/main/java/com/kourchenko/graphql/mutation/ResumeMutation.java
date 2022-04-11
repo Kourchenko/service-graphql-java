@@ -13,10 +13,6 @@ public class ResumeMutation implements GraphQLMutationResolver {
     @Autowired
     private ResumeService resumeService;
 
-    public Resume createResume() {
-        return this.resumeService.createResume();
-    }
-
     public Resume createResume(Person person) {
         return this.resumeService.createResume(person);
     }

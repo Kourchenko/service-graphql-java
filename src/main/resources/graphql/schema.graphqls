@@ -8,6 +8,8 @@ type Mutation {
     createExperienceList(experienceList: [ExperienceInput], resumeId: ID): [Experience]
 
     createEducationList(educationList: [EducationInput], resumeId: ID): [Education]
+
+    addEducationToResumeById(education: EducationInput, resumeId: ID): Education
 }
 
 type Resume {
@@ -33,59 +35,61 @@ input PersonInput {
     phoneNumber: String
 }
 
-type School {
-    id: ID!
-    education: Education
-    name: String
-    address: String
-}
-
-input SchoolInput {
-    name: String
-    address: String
-}
-
 type Education {
     id: ID!
-    degree: String
-    schoolList: [School]
+    schoolName: String
+    schoolAddress: String
+    schoolStartDate: String
+    schoolEndDate: String
+    gpa: Float
+    degreeTitle: String
+    degreeDescription: String
 }
 
 input EducationInput {
-    degree: String
-    schoolList: [SchoolInput]
+    schoolName: String
+    schoolAddress: String
+    schoolStartDate: String
+    schoolEndDate: String
+    gpa: Float
+    degreeTitle: String
+    degreeDescription: String
 }
 
 type Experience {
     id: ID!
     isCurrentRole: Boolean
     companyName: String
-    roleTitle: String
-    tools: String
-    skills: String
+    companyAddress: String
     startDate: String
     endDate: String
+    roleTitle: String
+    roleDescription: String
+    roleTools: String
+    roleSkills: String
 }
 
 input ExperienceInput {
     isCurrentRole: Boolean
     companyName: String
-    roleTitle: String
-    tools: String
-    skills: String
+    companyAddress: String
     startDate: String
     endDate: String
+    roleTitle: String
+    roleDescription: String
+    roleTools: String
+    roleSkills: String
 }
 
 type Project {
     id: ID!
-    projectName: String
-    roleTitle: String
+    name: String
     description: String
+    roleTitle: String
 }
 
 input ProjectInput {
-    projectName: String
-    roleTitle: String
+    name: String
     description: String
+    roleTitle: String
 }

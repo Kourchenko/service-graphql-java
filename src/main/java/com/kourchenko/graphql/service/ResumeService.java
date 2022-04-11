@@ -2,27 +2,27 @@ package com.kourchenko.graphql.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import javax.transaction.Transactional;
 import com.kourchenko.graphql.dao.Person;
 import com.kourchenko.graphql.dao.Resume;
+import com.kourchenko.graphql.error.ResumeNotFoundException;
 import com.kourchenko.graphql.service.repository.PersonRepository;
 import com.kourchenko.graphql.service.repository.ResumeRepository;
-import com.kourchenko.graphql.service.repository.ExperienceRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class ResumeService {
+    private static String METHOD = "";
 
-    private final ResumeRepository resumeRepository;
+    @Autowired
+    private ResumeRepository resumeRepository;
 
-    private final PersonRepository personRepository;
-
-    public ResumeService(final ResumeRepository resumeRepository,
-            final PersonRepository personRepository,
-            final ExperienceRepository workExperienceRepository) {
-        this.resumeRepository = resumeRepository;
-        this.personRepository = personRepository;
-    }
+    @Autowired
+    private PersonRepository personRepository;
 
     @Transactional
     public Resume createResume() {
@@ -53,7 +53,18 @@ public class ResumeService {
         return this.resumeRepository.findAll();
     }
 
-    public Resume findByResumeId(int id) {
-        return this.resumeRepository.findById(id).get();
+    public Resume findByResumeId(int resumeId) {
+        METHOD = "[ResumeService][findByResumeId]";
+        log.error(METHOD + " Finding Resume by ID: " + resumeId, resumeId);
+        Optional<Resume> optional = this.resumeRepository.findById(resumeId);
+        Resume resume = optional != null ? optional.get() : null;
+
+        if (optional == null || !optional.isPresent() || resume == null) {
+            log.error(METHOD + " Resume not found by ID: " + resumeId, resumeId);
+            throw new ResumeNotFoundException(METHOD + " Resume not found by ID: " + resumeId,
+                    resumeId);
+        }
+
+        return resume;
     }
 }

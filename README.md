@@ -7,104 +7,129 @@ GraphQL Endpoint using Docker, MySQL, and SringBoot.
 ```
 Class Resume
 1. Class Person
-    a. String Name
-    b. String Email
-    c. String Phone Number
+    a. Name
+    b. Email Address
+    c. Phone Number
 2. Class Education
-    a. Class School
-        i. String Name
-        ii. String Address
-    b. String Degree
+    a. School Name
+    b. School Address
+    c. School Start Date
+    d. School End Date
+    e. GPA
+    f. Degree Title
+    g. Degree Description
 3. Class Experience
-    a. String Company Name
-    b. String Address
-    d. Boolean Is Current Role
-    e. String Role Title
-    f. String Company Name
-    g. String Role Title
-    h. String Start Date
-    i. String End Date
+    a. Is Current Role
+    b. Company Name
+    c. Company Address
+    d. Start Date
+    e. End Date
+    f. Role Title
+    g. Role Description
+    h. Role Tools
+    i. Role Skills
 4. Class Projects
-    a. String Project Name
-    b. String Description
-    c. String Role Title
+    a. Name
+    b. Description
+    c. Role Title
 ```
 
 ### Sample Mutation
 
 ```
 mutation {
-  createResume(person: {
-    name: "First Name - Last Name",
-    emailAddress: null,
-    phoneNumber: null
-  }) {
+    createResume(person: {
+    name: "Diego Kourchenko",
+    emailAddress: "dkourchenko@gmail.com",
+    phoneNumber: "(678) 908-0605",
+    }) {
     id
-  },
-  createExperienceList(experienceList: [
-      {
-        isCurrentRole: false,
-        companyName: "Company 1",
-        roleTitle: "Role 1",
-        startDate: "1971-01-01",
-        endDate: "1971-01-02",
-      },
-      {
-        isCurrentRole: false,
-        companyName: "Company 2",
-        roleTitle: "Role 2",
-        startDate: "1972-01-01",
-        endDate: "1972-01-02",
-      },
-      {
-        isCurrentRole: false,
-        companyName: "Company 3",
-        roleTitle: "Role 3",
-        startDate: "1973-01-01",
-        endDate: "1973-01-02",
-      },
-      {
-        isCurrentRole: false,
-        companyName: "Company 4",
-        roleTitle: "Role 4",
-        startDate: "1974-01-01",
-        endDate: "1974-01-02",
-      },
-      {
-        isCurrentRole: true,
-        companyName: "Company 5",
-        roleTitle: "Role 5",
-        startDate: "1975-01-01",
-        endDate: "1975-01-02",
-      }
-  	], resumeId: 1) {
-      isCurrentRole,
-      companyName,
-      roleTitle
-	  startDate,
-      endDate
-  },
-  createEducationList(educationList: [
+    },
+    createEducationList(educationList: [
     {
-      degree: "School Degree",
-      schoolList: [
-        {
-          name: "School Name",
-          address: "School Address"
-        }
-      ]
+        schoolName: "Oregon State University (OSU)",
+        schoolAddress: "Corvallis, OR",
+        schoolStartDate: "2015-09-01",
+        schoolEndDate: "2019-06-01",
+        gpa: 3.56,
+        degreeTitle: "Bachelor of Science in Computer Science.",
+        degreeDescription: ""
     }
-  ], resumeId: 1) {
-    id,
-    degree,
-    schoolList {
-      name,
-      address
+    ], resumeId: 1) {
+        id,
+        schoolName,
+        schoolAddress,
+        schoolStartDate,
+        schoolEndDate,
+        gpa,
+        degreeTitle,
+        degreeDescription
     }
-  }
+    createExperienceList(experienceList: [
+    {
+        isCurrentRole: true,
+        companyName: "Adpearance",
+        companyAddress: "Portland, OR",
+        startDate: "2020-03-16",
+        endDate: "",
+        roleTitle: "Web Platform Developer",
+        roleDescription: "",
+        roleTools: "",
+        roleSkills: ""
+    },
+    {
+        isCurrentRole: false,
+        companyName: "Acme Cone",
+        companyAddress: "Eugene, OR",
+        startDate: "2019-09-01",
+        endDate: "2020-03-14",
+        roleTitle: "IT Support",
+        roleDescription: "",
+        roleTools: "",
+        roleSkills: ""
+    },
+    {
+        isCurrentRole: false,
+        companyName: "CBT Nuggets",
+        companyAddress: "Eugene, OR",
+        startDate: "2018-06-01",
+        endDate: "2019-03-01",
+        roleTitle: "Full-Stack Developer Intern",
+        roleDescription: "",
+        roleTools: "",
+        roleSkills: ""
+    }
+  	], resumeId: 1) {
+        isCurrentRole,
+        companyName,
+        companyAddress,
+        startDate,
+        endDate,
+        roleTitle,
+        roleDescription,
+    	roleTools,
+    	roleSkills
+    },
+  	addEducationToResumeById(education: {
+        schoolName: "Test Name",
+        schoolAddress: "Test Address",
+        schoolStartDate: "",
+        schoolEndDate: "",
+        gpa: 4.00,
+        degreeTitle: "Test Title",
+        degreeDescription: "Test Description"
+    }, resumeId: 1) {
+        id,
+        schoolName,
+        schoolAddress,
+        schoolStartDate,
+        schoolEndDate,
+        gpa,
+        degreeTitle,
+        degreeDescription
+    }
 }
 ```
-
 
 ### Sample Query
 ```
@@ -119,16 +144,23 @@ query {
     experienceList {
       isCurrentRole,
       companyName,
-      roleTitle
+      companyAddress,
 	  startDate,
-      endDate
+      endDate,
+      roleTitle,
+      roleDescription,
+      roleTools,
+      roleSkills
     },
     educationList {
-      degree,
-      schoolList {
-        name,
-        address
-      }
+      id,
+      schoolName,
+      schoolAddress,
+      schoolStartDate,
+      schoolEndDate,
+      gpa,
+      degreeTitle,
+      degreeDescription
     }
   }
 }

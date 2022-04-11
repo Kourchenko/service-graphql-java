@@ -26,19 +26,25 @@ public class Experience implements Serializable {
     private String companyName;
 
     @Column
-    private String roleTitle;
-
-    @Column
-    private String tools;
-
-    @Column
-    private String skills;
+    private String companyAddress;
 
     @Column
     private Date startDate;
 
     @Column
     private Date endDate;
+
+    @Column
+    private String roleTitle;
+
+    @Column
+    private String roleDescription;
+
+    @Column
+    private String roleTools;
+
+    @Column
+    private String roleSkills;
 
     public Resume getResume() {
         return this.resume;
@@ -64,28 +70,12 @@ public class Experience implements Serializable {
         this.companyName = companyName;
     }
 
-    public String getRoleTitle() {
-        return this.roleTitle;
+    public String getCompanyAddress() {
+        return this.companyAddress;
     }
 
-    public void setRoleTitle(String roleTitle) {
-        this.roleTitle = roleTitle;
-    }
-
-    public String getTools() {
-        return this.tools;
-    }
-
-    public void setTools(String tools) {
-        this.tools = tools;
-    }
-
-    public String getSkills() {
-        return this.skills;
-    }
-
-    public void setSkills(String skills) {
-        this.skills = skills;
+    public void setCompanyAddress(String companyAddress) {
+        this.companyAddress = companyAddress;
     }
 
     public Date getStartDate() {
@@ -102,5 +92,37 @@ public class Experience implements Serializable {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String getRoleTitle() {
+        return this.roleTitle;
+    }
+
+    public void setRoleTitle(String roleTitle) {
+        this.roleTitle = roleTitle;
+    }
+
+    public String getRoleDescription() {
+        return this.roleDescription;
+    }
+
+    public void setRoleDescription(String roleDescription) {
+        this.roleDescription = roleDescription;
+    }
+
+    public String getRoleTools() {
+        return this.roleTools;
+    }
+
+    public void setRoleTools(String roleTools) {
+        this.roleTools = roleTools;
+    }
+
+    public String getRoleSkills() {
+        return this.roleSkills;
+    }
+
+    public void setRoleSkills(String roleSkills) {
+        this.roleSkills = roleSkills;
     }
 }

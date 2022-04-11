@@ -19,7 +19,7 @@ public class Project implements Serializable {
     private Resume resume;
 
     @Column
-    private String projectName;
+    private String name;
 
     @Column
     private String description;
@@ -27,12 +27,12 @@ public class Project implements Serializable {
     @Column
     private String roleTitle;
 
-    public String getProjectName() {
-        return this.projectName;
+    public String getName() {
+        return this.name;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
