@@ -4,6 +4,8 @@ GraphQL Endpoint using Docker, MySQL, and SringBoot.
 [![Kourchenko](https://circleci.com/gh/Kourchenko/service-graphql-java.svg?style=shield)](https://github.com/Kourchenko/service-graphql-java#service-graphql-java)
 
 ## GraphQL
+
+### Data Overview
 ```
 Class Resume
 1. Class Person
@@ -35,7 +37,6 @@ Class Resume
 ```
 
 ### Sample Mutation
-
 ```
 mutation {
   createResume(
@@ -70,7 +71,7 @@ mutation {
       roleTitle: "Developer"
     }]
   ) {
-		id,
+    id,
     person {
      name,
       emailAddress,
@@ -139,55 +140,49 @@ query {
   }
 }
 ```
-JSON Response
+
+### JSON Response
 ```
 {
   "data": {
-    "resume": {
+    "createResume": {
       "id": "1",
       "person": {
-        "name": "First Name - Last Name",
-        "emailAddress": null,
-        "phoneNumber": null
+        "name": "Diego Kourchenko",
+        "emailAddress": "dkourchenko@gmail.com",
+        "phoneNumber": "(678) 908-0605"
       },
-      "experienceList": [{
-        "isCurrentRole": false,
-        "companyName": "Company 1",
-        "roleTitle": "Role 1",
-        "startDate": "1971-01-01 00:00:00.0",
-        "endDate": "1971-01-02 00:00:00.0"
-      },
-      {
-        "isCurrentRole": false,
-        "companyName": "Company 2",
-        "roleTitle": "Role 2",
-        "startDate": "1972-01-01 00:00:00.0",
-        "endDate": "1972-01-02 00:00:00.0"
-      },
-      {
-        "isCurrentRole": false,
-        "companyName": "Company 3",
-        "roleTitle": "Role 3",
-        "startDate": "1973-01-01 00:00:00.0",
-        "endDate": "1973-01-02 00:00:00.0"
-      },
-      {
-        "isCurrentRole": false,
-        "companyName": "Company 4",
-        "roleTitle": "Role 4",
-        "startDate": "1974-01-01 00:00:00.0",
-        "endDate": "1974-01-02 00:00:00.0"
-      },
-      {
-        "isCurrentRole": true,
-        "companyName": "Company 5",
-        "roleTitle": "Role 5",
-        "startDate": "1975-01-01 00:00:00.0",
-        "endDate": "1975-01-02 00:00:00.0"
-      }],
-      "educationList": [{
-        "degree": "School Degree"
-      }]
+      "educationList": [
+        {
+          "schoolName": "Oregon State",
+          "schoolAddress": "Corvallis, OR",
+          "schoolStartDate": "Tue Sep 01 00:00:00 UTC 2015",
+          "schoolEndDate": "Sat Jun 01 00:00:00 UTC 2019",
+          "gpa": 3.56,
+          "degreeTitle": "Bachelor in Computer Science",
+          "degreeDescription": ""
+        }
+      ],
+      "experienceList": [
+        {
+          "isCurrentRole": true,
+          "companyName": "Adpearance",
+          "companyAddress": "Portland, OR",
+          "startDate": "Mon Mar 16 00:00:00 UTC 2020",
+          "endDate": null,
+          "roleTitle": "Developer",
+          "roleDescription": "",
+          "roleTools": "",
+          "roleSkills": ""
+        }
+      ],
+      "projectList": [
+        {
+          "name": "SpeedUpAmerica",
+          "description": "",
+          "roleTitle": "Developer"
+        }
+      ]
     }
   }
 }
