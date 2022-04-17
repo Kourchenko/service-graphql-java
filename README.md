@@ -189,7 +189,6 @@ query {
 ```
 
 ### Postman
-
 <b>POST</b> Query: http://localhost:8080/graphql
 ```
 {
