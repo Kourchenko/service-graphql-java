@@ -1,11 +1,10 @@
 package com.kourchenko.graphql.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import javax.transaction.Transactional;
 import com.kourchenko.graphql.dao.Resume;
 import com.kourchenko.graphql.dao.Experience;
-import com.kourchenko.graphql.service.repository.ResumeRepository;
 import com.kourchenko.graphql.service.repository.ExperienceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,24 +13,45 @@ import org.springframework.stereotype.Service;
 public class ExperienceService {
 
     @Autowired
-    private ResumeRepository resumeRepository;
+    private ResumeService resumeService;
 
     @Autowired
     private ExperienceRepository experienceRepository;
 
     @Transactional
     public List<Experience> createExperienceList(List<Experience> experienceList, int resumeId) {
-        Optional<Resume> optional = this.resumeRepository.findById(resumeId);
-        Resume resume = optional != null ? optional.get() : null;
-
+        Resume resume = resumeService.findByResumeId(resumeId);
         for (Experience experience : experienceList) {
             experience.setResume(resume);
         }
 
-        return this.experienceRepository.saveAll(experienceList);
+        return experienceRepository.saveAll(experienceList);
     }
 
-    public List<Experience> findAllByResumeId(int id) {
-        return this.experienceRepository.findAllByResumeId(id);
+    @Transactional
+    public List<Experience> addExperienceByResumeId(List<Experience> experienceList, int resumeId) {
+        Resume resume = resumeService.findByResumeId(resumeId);
+
+        List<Experience> existingExperienceList = findAllByResumeId(resume.getId());
+        for (Experience experience : experienceList) {
+            experience.setResume(resume);
+            existingExperienceList.add(experience);
+        }
+
+        return experienceRepository.saveAll(existingExperienceList);
+    }
+
+    @Transactional
+    public List<Experience> saveAll(List<Experience> experienceList) {
+        List<Experience> savedExperienceList =
+                experienceList != null ? experienceList : new ArrayList<>();
+        return experienceRepository.saveAll(savedExperienceList);
+    }
+
+    @Transactional
+    public List<Experience> findAllByResumeId(int resumeId) {
+        List<Experience> experienceList = experienceRepository.findAllByResumeId(resumeId);
+        experienceList = experienceList != null ? experienceList : new ArrayList<>();
+        return experienceList;
     }
 }

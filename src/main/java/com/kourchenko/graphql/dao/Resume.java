@@ -1,10 +1,17 @@
 package com.kourchenko.graphql.dao;
 
 import lombok.Data;
-
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -49,7 +56,7 @@ public class Resume implements Serializable {
     }
 
     public List<Education> getEducationList() {
-        return educationList;
+        return this.educationList;
     }
 
     public void setEducationList(List<Education> educationList) {
@@ -57,8 +64,7 @@ public class Resume implements Serializable {
     }
 
     public List<Experience> getExperienceList() {
-        List<Experience> experienceList = new ArrayList<>(this.experienceList);
-        return experienceList;
+        return this.experienceList;
     }
 
     public void setExperienceList(List<Experience> experienceList) {
@@ -66,7 +72,7 @@ public class Resume implements Serializable {
     }
 
     public List<Project> getProjectList() {
-        return projectList;
+        return this.projectList;
     }
 
     public void setProjectList(List<Project> projectList) {

@@ -13,7 +13,7 @@ public class EducationQuery implements GraphQLQueryResolver {
     @Autowired
     private EducationService educationService;
 
-    public List<Education> findAllByResumeId(int id) {
-        return this.educationService.findAllByResumeId(id);
+    public List<Education> findEducationListByResumeId(int resumeId) {
+        return educationService.findAllByResumeId(resumeId);
     }
 }

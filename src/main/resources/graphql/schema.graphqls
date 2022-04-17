@@ -1,15 +1,24 @@
 type Query {
     resume(id: ID): Resume
+    findOnePersonByResumeId(resumeId: ID): Person
+    findExperienceListByResumeId(resumeId: ID): [Experience]
+    findEducationListByResumeId(resumeId: ID): [Education]
+    findProjectListByResumeId(resumeId: ID): [Project]
 }
 
 type Mutation {
     createResume(person: PersonInput): Resume
+    createResume(person: PersonInput, educationList: [EducationInput], experienceList: [ExperienceInput], projectList: [ProjectInput]): Resume
 
+    createPersonByResumeId(person: PersonInput, resumeId: ID): Person
     createExperienceList(experienceList: [ExperienceInput], resumeId: ID): [Experience]
-
     createEducationList(educationList: [EducationInput], resumeId: ID): [Education]
+    createProjectList(projectList: [ProjectInput], resumeId: ID): [Project]
 
-    addEducationToResumeById(education: EducationInput, resumeId: ID): Education
+    addPersonByResumeId(person: PersonInput, resumeId: ID): Person
+    addExperienceByResumeId(experienceList: [ExperienceInput], resumeId: ID): [Experience]
+    addEducationByResumeId(educationList: [EducationInput], resumeId: ID): [Education]
+    addProjectByResumeId(projectList: [ProjectInput], resumeId: ID): [Project]
 }
 
 type Resume {

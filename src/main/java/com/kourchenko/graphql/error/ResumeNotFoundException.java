@@ -11,6 +11,10 @@ public class ResumeNotFoundException extends RuntimeException implements GraphQL
 
     private Map<String, Object> extensions = new HashMap<>();
 
+    public ResumeNotFoundException(String message) {
+        super(message);
+    }
+
     public ResumeNotFoundException(String message, int id) {
         super(message);
         extensions.put("id", id);

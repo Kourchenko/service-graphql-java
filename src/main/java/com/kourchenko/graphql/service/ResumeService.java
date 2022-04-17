@@ -4,25 +4,46 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
+import com.kourchenko.graphql.dao.Education;
+import com.kourchenko.graphql.dao.Experience;
 import com.kourchenko.graphql.dao.Person;
+import com.kourchenko.graphql.dao.Project;
 import com.kourchenko.graphql.dao.Resume;
-import com.kourchenko.graphql.error.ResumeNotFoundException;
-import com.kourchenko.graphql.service.repository.PersonRepository;
 import com.kourchenko.graphql.service.repository.ResumeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
 public class ResumeService {
-    private static String METHOD = "";
 
     @Autowired
     private ResumeRepository resumeRepository;
 
     @Autowired
-    private PersonRepository personRepository;
+    private PersonService personService;
+
+    @Autowired
+    private EducationService educationService;
+
+    @Autowired
+    private ExperienceService experienceService;
+
+    @Autowired
+    private ProjectService projectService;
+
+    @Transactional
+    public Resume getResume(int resumeId) {
+        Resume resume = findByResumeId(resumeId);
+        if (resume == null) {
+            return null;
+        }
+
+        resume.setEducationList(educationService.findAllByResumeId(resumeId));
+        resume.setExperienceList(experienceService.findAllByResumeId(resumeId));
+        resume.setProjectList(projectService.findAllByResumeId(resumeId));
+
+        return resume;
+    }
 
     @Transactional
     public Resume createResume() {
@@ -32,7 +53,7 @@ public class ResumeService {
         resume.setCreatedDate(date);
         resume.setUpdatedDate(date);
 
-        return this.resumeRepository.save(resume);
+        return resumeRepository.save(resume);
     }
 
     @Transactional
@@ -42,28 +63,37 @@ public class ResumeService {
         Date date = new Date();
         resume.setCreatedDate(date);
         resume.setUpdatedDate(date);
-        this.personRepository.save(person);
+        personService.createPersonByResumeId(person, resume.getId());
 
         resume.setPerson(person);
 
-        return this.resumeRepository.save(resume);
+        return resumeRepository.save(resume);
     }
 
+    @Transactional
+    public Resume createResume(Person person, List<Education> educationList,
+            List<Experience> experienceList, List<Project> projectList) {
+        Resume resume = createResume();
+        person.setResume(resume);
+
+        int resumeId = resume.getId();
+        resume.setPerson(personService.createPersonByResumeId(person, resumeId));
+        resume.setEducationList(educationService.createEducationList(educationList, resumeId));
+        resume.setExperienceList(experienceService.createExperienceList(experienceList, resumeId));
+        resume.setProjectList(projectService.createProjectList(projectList, resumeId));
+
+        return resume;
+    }
+
+    @Transactional
     public List<Resume> getResumeAll() {
-        return this.resumeRepository.findAll();
+        return resumeRepository.findAll();
     }
 
+    @Transactional
     public Resume findByResumeId(int resumeId) {
-        METHOD = "[ResumeService][findByResumeId]";
-        log.error(METHOD + " Finding Resume by ID: " + resumeId, resumeId);
-        Optional<Resume> optional = this.resumeRepository.findById(resumeId);
-        Resume resume = optional != null ? optional.get() : null;
-
-        if (optional == null || !optional.isPresent() || resume == null) {
-            log.error(METHOD + " Resume not found by ID: " + resumeId, resumeId);
-            throw new ResumeNotFoundException(METHOD + " Resume not found by ID: " + resumeId,
-                    resumeId);
-        }
+        Optional<Resume> optional = resumeRepository.findById(resumeId);
+        Resume resume = optional.isPresent() ? optional.get() : null;
 
         return resume;
     }
