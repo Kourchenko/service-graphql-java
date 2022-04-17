@@ -67,7 +67,7 @@ mutation {
     projectList: [{
       name: "SpeedUpAmerica",
       description: "",
-      roleTitle: "Lead Developer"
+      roleTitle: "Developer"
     }]
   ) {
 		id,
