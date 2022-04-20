@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
 import com.kourchenko.graphql.dao.Resume;
+import com.kourchenko.graphql.error.ResumeNotFoundException;
 import com.kourchenko.graphql.dao.Project;
 import com.kourchenko.graphql.service.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class ProjectService {
     @Transactional
     public List<Project> createProjectList(List<Project> projectList, int resumeId) {
         Resume resume = resumeService.findByResumeId(resumeId);
+        if (resume == null) {
+            throw new ResumeNotFoundException("Resume Not Found.");
+        }
 
         for (Project project : projectList) {
             project.setResume(resume);
@@ -31,6 +35,9 @@ public class ProjectService {
     @Transactional
     public List<Project> addProjectByResumeId(List<Project> projectList, int resumeId) {
         Resume resume = resumeService.findByResumeId(resumeId);
+        if (resume == null) {
+            throw new ResumeNotFoundException("Resume Not Found.");
+        }
 
         List<Project> existingProjectList = findAllByResumeId(resume.getId());
 
@@ -49,6 +56,10 @@ public class ProjectService {
 
     @Transactional
     public List<Project> findAllByResumeId(int resumeId) {
+        Resume resume = resumeService.findByResumeId(resumeId);
+        if (resume == null) {
+            throw new ResumeNotFoundException("Resume Not Found.");
+        }
         List<Project> projectList = projectRepository.findAllByResumeId(resumeId);
         projectList = projectList != null ? projectList : new ArrayList<>();
         return projectList;

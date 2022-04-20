@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import org.apache.commons.lang3.StringUtils;
 import java.io.Serializable;
 
 @Data
@@ -63,5 +64,24 @@ public class Project implements Serializable {
 
     public void setRoleTitle(String roleTitle) {
         this.roleTitle = roleTitle;
+    }
+
+    public Project merge(Project project) {
+        if (project != null) {
+            String _name = project.getName();
+            _name = StringUtils.defaultIfBlank(_name, name);
+
+            String _description = project.getDescription();
+            _description = StringUtils.defaultIfBlank(_description, description);
+
+            String _roleTitle = project.getRoleTitle();
+            _roleTitle = StringUtils.defaultIfBlank(_roleTitle, roleTitle);
+
+            setName(_name);
+            setDescription(_description);
+            setRoleTitle(_roleTitle);
+        }
+
+        return this;
     }
 }

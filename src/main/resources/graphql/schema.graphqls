@@ -19,6 +19,9 @@ type Mutation {
     addExperienceByResumeId(experienceList: [ExperienceInput], resumeId: ID): [Experience]
     addEducationByResumeId(educationList: [EducationInput], resumeId: ID): [Education]
     addProjectByResumeId(projectList: [ProjectInput], resumeId: ID): [Project]
+
+    updatePersonByResumeId(person: PersonInput, resumeId: ID): Person
+    updateEducationListByResumeId(educationList: [EducationInput], resumeId: ID): [Education]
 }
 
 type Resume {
@@ -56,6 +59,7 @@ type Education {
 }
 
 input EducationInput {
+    id: ID
     schoolName: String
     schoolAddress: String
     schoolStartDate: String

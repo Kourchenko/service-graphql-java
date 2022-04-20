@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import org.apache.commons.lang3.StringUtils;
 import java.io.Serializable;
 
 @Data
@@ -51,5 +52,24 @@ public class Person implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Person merge(Person person) {
+        if (person != null) {
+            String _name = person.getName();
+            _name = StringUtils.defaultIfBlank(_name, name);
+
+            String _emailAddress = person.getEmailAddress();
+            _emailAddress = StringUtils.defaultIfBlank(_emailAddress, emailAddress);
+
+            String _phoneNumber = person.getPhoneNumber();
+            _phoneNumber = StringUtils.defaultIfBlank(_phoneNumber, phoneNumber);
+
+            setName(_name);
+            setEmailAddress(_emailAddress);
+            setPhoneNumber(_phoneNumber);
+        }
+
+        return this;
     }
 }

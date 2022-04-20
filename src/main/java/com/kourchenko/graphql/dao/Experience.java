@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import org.apache.commons.lang3.StringUtils;
 
 @Data
 @Entity
@@ -130,5 +131,49 @@ public class Experience implements Serializable {
 
     public void setRoleSkills(String roleSkills) {
         this.roleSkills = roleSkills;
+    }
+
+    public Experience merge(Experience experience) {
+        if (experience != null) {
+
+            Boolean _isCurrentRole = experience.getIsCurrentRole();
+            _isCurrentRole = _isCurrentRole != null ? _isCurrentRole : isCurrentRole;
+
+            String _companyName = experience.getCompanyName();
+            _companyName = StringUtils.defaultIfBlank(_companyName, companyName);
+
+            String _companyAddress = experience.getCompanyAddress();
+            _companyAddress = StringUtils.defaultIfBlank(_companyAddress, companyAddress);
+
+            Date _startDate = experience.getStartDate();
+            _startDate = _startDate != null ? _startDate : startDate;
+
+            Date _endDate = experience.getEndDate();
+            _endDate = _endDate != null ? _endDate : endDate;
+
+            String _roleTitle = experience.getRoleTitle();
+            _roleTitle = StringUtils.defaultIfBlank(_roleTitle, roleTitle);
+
+            String _roleDescription = experience.getRoleDescription();
+            _roleDescription = StringUtils.defaultIfBlank(_roleDescription, roleDescription);
+
+            String _roleTools = experience.getRoleTools();
+            _roleTools = StringUtils.defaultIfBlank(_roleTools, roleTools);
+
+            String _roleSkills = experience.getRoleSkills();
+            _roleSkills = StringUtils.defaultIfBlank(_roleSkills, roleSkills);
+
+            setIsCurrentRole(_isCurrentRole);
+            setCompanyName(_companyName);
+            setCompanyAddress(_companyAddress);
+            setStartDate(_startDate);
+            setEndDate(_endDate);
+            setRoleTitle(_roleTitle);
+            setRoleDescription(_roleDescription);
+            setRoleTools(_roleTools);
+            setRoleSkills(_roleSkills);
+        }
+
+        return this;
     }
 }

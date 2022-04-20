@@ -9,6 +9,7 @@ import com.kourchenko.graphql.dao.Experience;
 import com.kourchenko.graphql.dao.Person;
 import com.kourchenko.graphql.dao.Project;
 import com.kourchenko.graphql.dao.Resume;
+import com.kourchenko.graphql.error.ResumeNotFoundException;
 import com.kourchenko.graphql.service.repository.ResumeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class ResumeService {
     public Resume getResume(int resumeId) {
         Resume resume = findByResumeId(resumeId);
         if (resume == null) {
-            return null;
+            throw new ResumeNotFoundException("Resume Not Found.");
         }
 
         resume.setEducationList(educationService.findAllByResumeId(resumeId));

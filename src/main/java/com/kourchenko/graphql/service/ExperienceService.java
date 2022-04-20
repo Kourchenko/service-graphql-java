@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
 import com.kourchenko.graphql.dao.Resume;
+import com.kourchenko.graphql.error.ResumeNotFoundException;
 import com.kourchenko.graphql.dao.Experience;
 import com.kourchenko.graphql.service.repository.ExperienceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class ExperienceService {
     @Transactional
     public List<Experience> createExperienceList(List<Experience> experienceList, int resumeId) {
         Resume resume = resumeService.findByResumeId(resumeId);
+        if (resume == null) {
+            throw new ResumeNotFoundException("Resume Not Found.");
+        }
         for (Experience experience : experienceList) {
             experience.setResume(resume);
         }
@@ -31,6 +35,9 @@ public class ExperienceService {
     @Transactional
     public List<Experience> addExperienceByResumeId(List<Experience> experienceList, int resumeId) {
         Resume resume = resumeService.findByResumeId(resumeId);
+        if (resume == null) {
+            throw new ResumeNotFoundException("Resume Not Found.");
+        }
 
         List<Experience> existingExperienceList = findAllByResumeId(resume.getId());
         for (Experience experience : experienceList) {
