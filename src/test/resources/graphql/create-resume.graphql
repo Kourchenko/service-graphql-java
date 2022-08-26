@@ -1,9 +1,0 @@
-mutation {
-    createResume(person: {
-        name: "First Name - Last Name",
-        emailAddress: null,
-        phoneNumber: null
-    }) {
-        id
-    }
-}

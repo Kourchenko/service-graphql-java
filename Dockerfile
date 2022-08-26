@@ -1,16 +1,13 @@
-FROM 861920639236.dkr.ecr.us-west-2.amazonaws.com/maven-3.5-jdk-8:latest
-
-RUN mvn clean install -DskipTests
+FROM maven:3.5-jdk-8
 
 WORKDIR /app
 
-COPY . /app
-RUN mvn -v
+COPY . .
 
-RUN mvn verify clean --fail-never
+RUN mvn clean install
+
+RUN cp target/servicegraphqljava.jar .
+
+ENTRYPOINT ["java", "-jar", "servicegraphqljava.jar"]
 
 EXPOSE 8080
-
-COPY ./target/ervice-graphql-java.jar /app
-
-ENTRYPOINT ["java", "-jar", "/app/service-graphql-java.jar"]
