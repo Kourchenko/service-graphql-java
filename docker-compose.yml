@@ -15,12 +15,13 @@ services:
 
   graphql-java:
     build: .
+    env_file:
+      - local.env
     volumes:
       - .:/app
       - ~/.m2:/root/.m2
     working_dir: /app
     ports:
       - 8080:8080
-    command: mvn clean spring-boot:run
     depends_on:
       - mysql

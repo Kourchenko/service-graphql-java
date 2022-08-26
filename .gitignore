@@ -34,3 +34,6 @@ target/*
 
 # Deleted Files
 bin/*
+
+# Local Env
+*.env

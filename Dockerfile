@@ -8,6 +8,6 @@ RUN mvn clean install
 
 RUN cp target/servicegraphqljava.jar .
 
-ENTRYPOINT ["java", "-jar", "servicegraphqljava.jar"]
-
 EXPOSE 8080
+
+ENTRYPOINT ["mvn", "clean", "spring-boot:run"]
